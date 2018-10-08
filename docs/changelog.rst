@@ -1,15 +1,23 @@
 Changelog
 =========
 
-0.5 (in development)
---------------------
+1.1 (04/12/2017)
+----------------
+
+ - Added `set_background_color_rgb` operation
+ - Update MANIFEST.in (Sanny Kumar)
+
+1.0 (04/08/2017)
+----------------
 
  - OpenCV 3 support (Will Giddens)
  - Removed Apple copyrighted ICC profile from orientation test images (Christopher Hoskin)
  - Fix: Altered `detect_features` in OpenCV 3 to return a list instead of a numpy array (Trent Holliday)
+ - Support for TIFF files (Maik Hoepfel)
+ - Support for BMP files was made official (Maik Hoepfel)
 
 0.4 (05/10/2016)
---------------------
+----------------
 
  - Support for image optimisation and saving progressive JPEG files
  - Added documentation

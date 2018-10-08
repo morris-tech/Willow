@@ -20,16 +20,16 @@ except ImportError:
 
 setup(
     name='Willow',
-    version='0.4',
+    version='1.1',
     description='A Python image library that sits on top of Pillow, Wand and OpenCV',
     author='Karl Hobley',
-    author_email='karlhobley10@gmail.com',
+    author_email='karl@kaed.uk',
     url='',
     packages=find_packages(exclude=['tests']),
     include_package_data=True,
     license='BSD',
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 5 - Production/Stable',
         'Topic :: Multimedia :: Graphics',
         'Topic :: Multimedia :: Graphics :: Graphics Conversion',
         'Intended Audience :: Developers',
