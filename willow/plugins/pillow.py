@@ -104,7 +104,18 @@ class PillowImage(Image):
         if exif:
             kwargs['exif'] = exif
 
-        image.save(f, 'JPEG', quality=quality, **kwargs)
+        # Try and save the image with the EXIF data.
+        # Sometimes the EXIF data causes OSErrors to occur when saving the image, remove the EXIF data and try again
+        try:
+            image.save(f, 'JPEG', quality=quality, **kwargs)
+        except OSError as e:
+            if 'exif' in kwargs:
+                kwargs.pop('exif')
+                image.save(f, 'JPEG', quality=quality, **kwargs)
+            else:
+                # EXIF data not present so raise the original error
+                raise e
+
         return JPEGImageFile(f)
 
     @Image.operation
