@@ -104,7 +104,15 @@ class PillowImage(Image):
         if exif:
             kwargs['exif'] = exif
 
-        image.save(f, 'JPEG', quality=quality, **kwargs)
+        try:
+            image.save(f, 'JPEG', quality=quality, **kwargs)
+        except OSError as e:
+            if 'exif' in kwargs:
+                kwargs.pop('exif')
+                image.save(f, 'JPEG', quality=quality, **kwargs)
+            else:
+                raise e
+
         return JPEGImageFile(f)
 
     @Image.operation
