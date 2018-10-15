@@ -100,21 +100,7 @@ class PillowImage(Image):
             kwargs['progressive'] = True
         kwargs['icc_profile'] = image.info.get('icc_profile')
 
-        exif = image.info.get('exif')
-        if exif:
-            kwargs['exif'] = exif
-
-        # Try and save the image with the EXIF data.
-        # Sometimes the EXIF data causes OSErrors to occur when saving the image, remove the EXIF data and try again
-        try:
-            image.save(f, 'JPEG', quality=quality, **kwargs)
-        except OSError as e:
-            if 'exif' in kwargs:
-                kwargs.pop('exif')
-                image.save(f, 'JPEG', quality=quality, **kwargs)
-            else:
-                # EXIF data not present so raise the original error
-                raise e
+        image.save(f, 'JPEG', quality=quality, **kwargs)
 
         return JPEGImageFile(f)
 
