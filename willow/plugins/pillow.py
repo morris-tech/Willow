@@ -146,6 +146,8 @@ class PillowImage(Image):
             kwargs['progressive'] = True
         kwargs['icc_profile'] = image.info.get('icc_profile')
 
+        # Sometimes the ICC profile data will cause an OSError when trying to save the image
+        # If this happens we save it a second time without the ICC profile
         try:
             image.save(f, 'JPEG', quality=quality, **kwargs)
         except OSError as e:
