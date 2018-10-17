@@ -146,7 +146,14 @@ class PillowImage(Image):
             kwargs['progressive'] = True
         kwargs['icc_profile'] = image.info.get('icc_profile')
 
-        image.save(f, 'JPEG', quality=quality, **kwargs)
+        try:
+            image.save(f, 'JPEG', quality=quality, **kwargs)
+        except OSError as e:
+            if 'icc_profile' in kwargs:
+                kwargs.pop('icc_profile')
+                image.save(f, 'JPEG', quality=quality, **kwargs)
+            else:
+                raise e
 
         return JPEGImageFile(f)
 
